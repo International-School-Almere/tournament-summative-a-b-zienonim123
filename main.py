@@ -1,2 +1,5 @@
 #main file for the Tournament App.
-nj
+teams = []
+individuals = []
+events = []
+scores = {}
