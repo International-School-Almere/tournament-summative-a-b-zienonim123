@@ -8,16 +8,16 @@
 # 1. Project Overview
 
 ## Project Title
-[Write your project title here]
+Tournament scoring system app
 
 ## Project Description
-[Briefly explain what the project is about]
+Tha twill be programn that the college wil be used to manage scoring system at the tournament
 
 ## Start Date
-[Unknown / add later]
+[4th of April 2026
 
 ## Target End Date
-[Unknown / add later]
+6th of May 2026
 
 ## File list.
 
