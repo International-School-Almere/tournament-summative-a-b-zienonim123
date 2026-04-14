@@ -19,13 +19,13 @@ def menu():
             print("add individual to the teams")
 
         elif choice == "2":
-            print("add team")
+            add_team()
 
         elif choice == "3":
-            print("add event")
+            add_event()
         
         elif choice == "4":
-            print("view scores")
+            view_scores()
         else:
             print("wrong option")
 
