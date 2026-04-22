@@ -1,5 +1,5 @@
 # main file for the Tournament App.
-
+import GUI
 
 
 teams = []
