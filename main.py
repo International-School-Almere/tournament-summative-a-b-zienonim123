@@ -32,11 +32,11 @@ def add_individual_to_teams():
     if individual_name not in individuals:
         print(f"Individual '{individual_name}' does not exist.")
         return
-
-    team_name = input("Enter the name of the team to add the individual to: ")
-    if team_name not in teams:
-        print(f"Team '{team_name}' does not exist.")
-        return
+    else:
+        team_name = input("Enter the name of the team to add the individual to: ")
+        if team_name not in teams:
+            print(f"Team '{team_name}' does not exist.")
+            return
 
     print(f"Individual '{individual_name}' added to team '{team_name}' successfully.")
 
@@ -93,4 +93,4 @@ def menu():
         else:
             print("wrong option")
 
-menu()  
+menu()   
