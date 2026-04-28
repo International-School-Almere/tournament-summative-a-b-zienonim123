@@ -1,96 +1,104 @@
 # main file for the Tournament App.
-import GUI
 
+import tkinter as tk
+from tkinter import messagebox, simpledialog
 
 teams = []
 individuals = []
 events = []
 scores = {}
+teammembers = {}
 
 
 def add_individual():
-    name = input("Enter name of the individual: ")
+    name = simpledialog.askstring("Add Individual", "Enter name of the individual:")
+    if name is None:
+        return
+    name = name.strip()
+
     if name == "":
-        print("Individual name cannot be empty.")
+        messagebox.showerror("Error", "Individual name cannot be empty.")
     else:
         individuals.append(name)
         scores[name] = 0
-        print(f"Individual '{name}' added successfully.")
+        messagebox.showinfo("Success", f"Individual '{name}' added successfully.")
 
 
 def add_team():
-    name = input("Enter team name: ")
+    name = simpledialog.askstring("Add Team", "Enter team name:")
+    if name is None:
+        return
+    name = name.strip()
+
     if name == "":
-        print("Team name cannot be empty.")
+        messagebox.showerror("Error", "Team name cannot be empty.")
     else:
         teams.append(name)
+        teammembers[name] = []
         scores[name] = 0
-        print(f"Team '{name}' added successfully.")
+        messagebox.showinfo("Success", f"Team '{name}' added successfully.")
+
 
 def add_individual_to_teams():
-    individual_name = input("Enter the name of the individual to add to a team: ")
+    individual_name = simpledialog.askstring("Add Individual to Team", "Enter individual name:")
+    if individual_name is None:
+        return
+    individual_name = individual_name.strip()
+
     if individual_name not in individuals:
-        print(f"Individual '{individual_name}' does not exist.")
+        messagebox.showerror("Error", "Individual does not exist.")
         return
 
-    team_name = input("Enter the name of the team to add the individual to: ")
+    team_name = simpledialog.askstring("Add Individual to Team", "Enter team name:")
+    if team_name is None:
+        return
+    team_name = team_name.strip()
+
     if team_name not in teams:
-        print(f"Team '{team_name}' does not exist.")
+        messagebox.showerror("Error", "Team does not exist.")
         return
 
-    print(f"Individual '{individual_name}' added to team '{team_name}' successfully.")
+    teammembers[team_name].append(individual_name)
+    messagebox.showinfo("Success", f"Added {individual_name} to {team_name}")
 
 
 def add_event():
-    name = input("Enter event name: ")
+    name = simpledialog.askstring("Add Event", "Enter event name:")
+    if name is None:
+        return
+    name = name.strip()
+
     if name == "":
-        print("Event name cannot be empty.")
+        messagebox.showerror("Error", "Event name cannot be empty.")
     else:
         events.append(name)
-        print(f"Event '{name}' added successfully.")
+        messagebox.showinfo("Success", f"Event '{name}' added successfully.")
 
 
 def view_scores():
     if len(scores) == 0:
-        print("No scores available.")    
-    else:  
+        messagebox.showinfo("Scores", "No scores available.")
+    else:
+        text = ""
         for name, score in scores.items():
-            print(f"Name: {name}, Score: {score}")
+            text += f"{name}: {score}\n"
+        messagebox.showinfo("Scores", text)
 
 
+# GUI
+root = tk.Tk()
+root.title("Tournament App")
+root.geometry("400x350")
+
+label = tk.Label(root, text="Tournament App", font=("Arial", 16))
+label.pack(pady=10)
 
 
+tk.Button(root, text="Add Individual", command=add_individual).pack(pady=5)
+tk.Button(root, text="Add Team", command=add_team).pack(pady=5)
+tk.Button(root, text="Add Individual to Team", command=add_individual_to_teams).pack(pady=5)
+tk.Button(root, text="Add Event", command=add_event).pack(pady=5)
+tk.Button(root, text="View Scores", command=view_scores).pack(pady=5)
+tk.Button(root, text="Exit", command=root.destroy).pack(pady=5)
 
-
-
-def menu():
-    running = True
-    while running:
-        print("1 - add individual")
-        print("2 - add team")
-        print("3 - add individual to team")
-        print("4 - add event")
-        print("5 - view scores")
-        print("6 - exit")
-        choice = input("Choose option: ")
-
-        if choice == "1":
-            add_individual()
-
-        elif choice == "2":
-            add_team()
-
-        elif choice == "3":
-            add_individual_to_teams()
-        
-        elif choice == "4":
-            add_event()
-
-        elif choice == "5":
-            view_scores()
-        elif choice == "6":
-            running = False
-        else:
-            print("wrong option")
-
-menu()  
+root.mainloop()
