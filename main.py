@@ -2,6 +2,7 @@
 
 import tkinter as tk
 from tkinter import messagebox, simpledialog
+import json
 
 teams = []
 individuals = []
@@ -48,13 +49,6 @@ def add_individual_to_teams():
     if individual_name not in individuals:
         messagebox.showerror("Error", "Individual does not exist.")
         return
-<<<<<<< HEAD
-    else:
-        team_name = input("Enter the name of the team to add the individual to: ")
-        if team_name not in teams:
-            print(f"Team '{team_name}' does not exist.")
-            return
-=======
 
     team_name = simpledialog.askstring("Add Individual to Team", "Enter team name:")
     if team_name is None:
@@ -64,7 +58,6 @@ def add_individual_to_teams():
     if team_name not in teams:
         messagebox.showerror("Error", "Team does not exist.")
         return
->>>>>>> 6a9e470d7da503aa70b419c322394d757829f736
 
     teammembers[team_name].append(individual_name)
     messagebox.showinfo("Success", f"Added {individual_name} to {team_name}")
@@ -109,40 +102,5 @@ tk.Button(root, text="Add Event", command=add_event).pack(pady=5)
 tk.Button(root, text="View Scores", command=view_scores).pack(pady=5)
 tk.Button(root, text="Exit", command=root.destroy).pack(pady=5)
 
-<<<<<<< HEAD
 
-
-def menu():
-    running = True
-    while running:
-        print("1 - add individual")
-        print("2 - add team")
-        print("3 - add individual to team")
-        print("4 - add event")
-        print("5 - view scores")
-        print("6 - exit")
-        choice = input("Choose option: ")
-
-        if choice == "1":
-            add_individual()
-
-        elif choice == "2":
-            add_team()
-
-        elif choice == "3":
-            add_individual_to_teams()
-        
-        elif choice == "4":
-            add_event()
-
-        elif choice == "5":
-            view_scores()
-        elif choice == "6":
-            running = False
-        else:
-            print("wrong option")
-
-menu()   
-=======
 root.mainloop()
->>>>>>> 6a9e470d7da503aa70b419c322394d757829f736
