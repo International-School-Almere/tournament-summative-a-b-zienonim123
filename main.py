@@ -75,6 +75,62 @@ def add_event():
         events.append(name)
         messagebox.showinfo("Success", f"Event '{name}' added successfully.")
 
+    
+def add_participant_to_event():
+    event_name = simpledialog.askstring("Add to Event", "Enter event name:")
+    if event_name is None:
+        return
+    event_name = event_name.strip()
+
+    if event_name not in events:
+        messagebox.showerror("Error", "Event does not exist.")
+        return
+
+    participant_name = simpledialog.askstring("Add to Event", "Enter individual or team name:")
+    if participant_name is None:
+        return
+    participant_name = participant_name.strip()
+
+    if participant_name not in individuals and participant_name not in teams:
+        messagebox.showerror("Error", "Participant does not exist.")
+        return
+
+    if event_name not in scores:
+        scores[event_name] = []
+
+    scores.setdefault(event_name, [])
+    scores[event_name].append(participant_name)
+
+    messagebox.showinfo("Success", f"Added {participant_name} to event {event_name}")
+
+
+def add_team_to_event():
+    event_name = simpledialog.askstring("Add Team to Event", "Enter event name:")
+    if event_name is None:
+        return
+    event_name = event_name.strip()
+
+    if event_name not in events:
+        messagebox.showerror("Error", "Event does not exist.")
+        return
+
+    team_name = simpledialog.askstring("Add Team to Event", "Enter team name:")
+    if team_name is None:
+        return
+    team_name = team_name.strip()
+
+    if team_name not in teams:
+        messagebox.showerror("Error", "Team does not exist.")
+        return
+
+    if event_name not in scores:
+        scores[event_name] = []
+
+    scores.setdefault(event_name, [])
+    scores[event_name].append(team_name)
+
+    messagebox.showinfo("Success", f"Added team {team_name} to event {event_name}")
+
 
 def view_scores():
     if len(scores) == 0:
@@ -99,6 +155,8 @@ tk.Button(root, text="Add Individual", command=add_individual).pack(pady=5)
 tk.Button(root, text="Add Team", command=add_team).pack(pady=5)
 tk.Button(root, text="Add Individual to Team", command=add_individual_to_teams).pack(pady=5)
 tk.Button(root, text="Add Event", command=add_event).pack(pady=5)
+tk.Button(root, text="Add Participant to Event", command=add_participant_to_event).pack(pady=5)
+tk.Button(root, text="Add Team to Event", command=add_team_to_event).pack(pady=5)
 tk.Button(root, text="View Scores", command=view_scores).pack(pady=5)
 tk.Button(root, text="Exit", command=root.destroy).pack(pady=5)
 
