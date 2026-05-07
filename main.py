@@ -11,6 +11,34 @@ scores = {}
 teammembers = {}
 
 
+def save_data():
+    data = {
+        "teams": teams,
+        "individuals": individuals,
+        "events": events,
+        "scores": scores,
+        "teammembers": teammembers
+    }
+
+    with open("data.json", "w") as file:
+        json.dump(data, file, indent=4)
+
+
+def load_data():
+    global teams, individuals, events, scores, teammembers
+
+    try:
+        with open("data.json", "r") as file:
+            data = json.load(file)
+            teams = data.get("teams", [])
+            individuals = data.get("individuals", [])
+            events = data.get("events", [])
+            scores = data.get("scores", {})
+            teammembers = data.get("teammembers", {})
+    except FileNotFoundError:
+        pass
+
+
 def add_individual():
     name = simpledialog.askstring("Add Individual", "Enter name of the individual:")
     if name is None:
@@ -22,6 +50,7 @@ def add_individual():
     else:
         individuals.append(name)
         scores[name] = 0
+        save_data()
         messagebox.showinfo("Success", f"Individual '{name}' added successfully.")
 
 
@@ -37,6 +66,7 @@ def add_team():
         teams.append(name)
         teammembers[name] = []
         scores[name] = 0
+        save_data()
         messagebox.showinfo("Success", f"Team '{name}' added successfully.")
 
 
@@ -60,6 +90,7 @@ def add_individual_to_teams():
         return
 
     teammembers[team_name].append(individual_name)
+    save_data()
     messagebox.showinfo("Success", f"Added {individual_name} to {team_name}")
 
 
@@ -73,6 +104,7 @@ def add_event():
         messagebox.showerror("Error", "Event name cannot be empty.")
     else:
         events.append(name)
+        save_data()
         messagebox.showinfo("Success", f"Event '{name}' added successfully.")
 
     
@@ -100,6 +132,7 @@ def add_participant_to_event():
 
     scores.setdefault(event_name, [])
     scores[event_name].append(participant_name)
+    save_data()
 
     messagebox.showinfo("Success", f"Added {participant_name} to event {event_name}")
 
@@ -128,6 +161,7 @@ def add_team_to_event():
 
     scores.setdefault(event_name, [])
     scores[event_name].append(team_name)
+    save_data()
 
     messagebox.showinfo("Success", f"Added team {team_name} to event {event_name}")
 
@@ -142,6 +176,7 @@ def view_scores():
         messagebox.showinfo("Scores", text)
 
 
+load_data()
 # GUI
 root = tk.Tk()
 root.title("Tournament App")

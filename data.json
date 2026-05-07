@@ -1,0 +1,15 @@
+{
+    "teams": [
+        "test"
+    ],
+    "individuals": [],
+    "events": [
+        "hockey"
+    ],
+    "scores": {
+        "test": 0
+    },
+    "teammembers": {
+        "test": []
+    }
+}
