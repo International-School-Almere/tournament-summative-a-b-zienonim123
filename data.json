@@ -1,15 +1,21 @@
 {
     "teams": [
-        "test"
+        "test",
+        "test2"
     ],
-    "individuals": [],
+    "individuals": [
+        "Koen"
+    ],
     "events": [
         "hockey"
     ],
     "scores": {
-        "test": 0
+        "test": 0,
+        "test2": 0,
+        "Koen": 0
     },
     "teammembers": {
-        "test": []
+        "test": [],
+        "test2": []
     }
 }
